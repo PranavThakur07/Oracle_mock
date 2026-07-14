@@ -1,0 +1,102 @@
+{
+  "scenarios": [
+    {
+      "id": "A",
+      "title": "Accelerated Growth",
+      "summary": "Join a venture-backed Series A startup as the Lead Engineer, taking significant equity compensation.",
+      "timeline": [
+        { "year": "Year 1", "title": "Bootstrap System", "description": "Rebuild legacy architecture, configure scale thresholds." },
+        { "year": "Year 2-3", "title": "Equity Realization", "description": "Achieve milestone vesting, lead a growing core dev division." },
+        { "year": "Year 5", "title": "Scale Liquidity", "description": "Venture secondary sales, leverage personal equity reserves." }
+      ],
+      "pros": ["Highest equity upside", "Fast path to engineering leadership", "High autonomy"],
+      "cons": ["High probability of failure", "Volatile working hours", "Lower base salary"],
+      "risks": ["Venture default", "Equity dilution", "Founder disputes"],
+      "estimated_costs": "Sweat equity investment, 15% below market cash base",
+      "expected_benefits": "Generational wealth upside via equity, rapid network expansion",
+      "skills_required": ["System Architecture", "Venture Scaling", "Distributed Databases"],
+      "opportunity_cost": "$25,000 yearly cash differential compared to corporate paths",
+      "confidence_level": 70,
+      "reasoning": "Fits your 'Builder' archetype and 'Growth Over Balance' priorities perfectly.",
+      "next_steps": ["Review equity vesting schedule", "Assess Series A runway metrics"]
+    },
+    {
+      "id": "B",
+      "title": "Balanced Path",
+      "summary": "Accept a Senior Software Engineer position at a mid-sized public technology company with stable salary and stock.",
+      "timeline": [
+        { "year": "Year 1", "title": "Stabilize Role", "description": "Deliver core features, map promotions path." },
+        { "year": "Year 2-3", "title": "Lead Engineer Promotion", "description": "Assume team leadership, vest first batch of RSUs." },
+        { "year": "Year 5", "title": "Principal Path", "description": "Cross-functional scope, optimize savings allocations." }
+      ],
+      "pros": ["Consistent base salary", "Predictable hours", "Solid health benefits"],
+      "cons": ["Slower trajectory to director", "Less equity volatility upside", "Bureaucratic overhead"],
+      "risks": ["Corporate stagnation", "Market stock drop", "Organizational restructurings"],
+      "estimated_costs": "Commute, standard corporate performance pressure",
+      "expected_benefits": "High liquid savings rate, robust work-life separation",
+      "skills_required": ["System Integration", "Agile Management", "Interpersonal influence"],
+      "opportunity_cost": "Missed early startup equity upside and rapid scaling experience",
+      "confidence_level": 85,
+      "reasoning": "Appeals to your 'Balanced' risk profile while maintaining professional growth.",
+      "next_steps": ["Analyze stock options vesting package", "Interview future team lead"]
+    },
+    {
+      "id": "C",
+      "title": "Defensive Hedge",
+      "summary": "Remain in current role as a Senior Dev, negotiate 100% remote flexibility and start a high-margin freelance consulting gig.",
+      "timeline": [
+        { "year": "Year 1", "title": "Remote Optimization", "description": "Streamline day job throughput, secure first freelance client." },
+        { "year": "Year 2-3", "title": "Consulting Expansion", "description": "Double freelance billing rates, register LLC." },
+        { "year": "Year 5", "title": "Consulting Transition", "description": "Option to transition full time to LLC or maintain low-risk mix." }
+      ],
+      "pros": ["Highest near-term cash flow", "No single point of job failure", "Extreme geographical flexibility"],
+      "cons": ["Double client load", "Zero enterprise equity scale", "Tax filing complexity"],
+      "risks": ["Freelance client attrition", "Cognitive burnout", "Current employer policy changes"],
+      "estimated_costs": "15-20 hours weekly personal time layout",
+      "expected_benefits": "Direct diversification of income streams, independent cash reserves",
+      "skills_required": ["Client Acquisition", "Contract Negotiation", "Full-Stack engineering"],
+      "opportunity_cost": "Corporate promotion progress and executive leadership experience",
+      "confidence_level": 90,
+      "reasoning": "Leverages your 'Invest Aggressively' financial style by maximizing freelance cash reserves.",
+      "next_steps": ["Draft template service agreements", "Optimize calendar partitions"]
+    }
+  ],
+  "assumptions": [
+    "Starting liquid capital: $20,000",
+    "Current baseline salary: $80,000",
+    "Target timeframe: 5 Years"
+  ],
+  "disclaimer": "This prototype simulation models trade-offs based on hardcoded scenario matrices for hackathon showcase.",
+  "recommendations": {
+    "Strategic Fit": "Venture Lead Engineer (Scenario A) yields the highest long-term leverage but freelancing (Scenario C) provides superior near-term liquidity.",
+    "Tactical Move": "If near-term capital is vital, select Scenario C. If builder autonomy dominates, Scenario A is your choice."
+  },
+  "comparison_metrics": {
+    "A": {
+      "risk": 8,
+      "cost": 7,
+      "growth": 9,
+      "learning": 9,
+      "work_life_balance": 4
+    },
+    "B": {
+      "risk": 4,
+      "cost": 3,
+      "growth": 6,
+      "learning": 6,
+      "work_life_balance": 7
+    },
+    "C": {
+      "risk": 5,
+      "cost": 5,
+      "growth": 7,
+      "learning": 8,
+      "work_life_balance": 5
+    }
+  },
+  "dna_influence": {
+    "Risk Appetite": "Balanced",
+    "Growth Preference": "High",
+    "Financial Style": "Invest Aggressively"
+  }
+}

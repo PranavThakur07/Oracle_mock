@@ -1,0 +1,55 @@
+{
+  "goal": "Entrepreneurship",
+  "risk": "Balanced",
+  "financial_style": "Invest Aggressively",
+  "learning_style": "Hands On",
+  "work_life_balance": "Growth Over Balance",
+  "vision": "Start Company",
+  "generated_profile": {
+    "decision_archetype": {
+      "value": "Builder",
+      "score": 9,
+      "explanation": "Driven by asset creation and systemic scale. You construct frameworks and leverage high-risk options.",
+      "weight": 0.90
+    },
+    "risk_appetite": {
+      "value": "Balanced",
+      "score": 7,
+      "explanation": "Calculated career leaps. You take risks when the upside asymmetry is clear.",
+      "weight": 0.75
+    },
+    "growth_orientation": {
+      "value": "High",
+      "score": 8,
+      "explanation": "Steep learning curve preference. You prioritize speed of advancement over stability.",
+      "weight": 0.85
+    },
+    "financial_behaviour": {
+      "value": "Invest Aggressively",
+      "score": 9,
+      "explanation": "High asset leverage. You direct surplus capital into equity, tools, and personal ventures.",
+      "weight": 0.80
+    },
+    "learning_style": {
+      "value": "Hands On",
+      "score": 8,
+      "explanation": "Direct trial and execution. You acquire skills by building systems rather than listening.",
+      "weight": 0.70
+    },
+    "work_life_balance": {
+      "value": "Growth Over Balance",
+      "score": 7,
+      "explanation": "Sprinting periods. You willingly sacrifice near-term equilibrium to hit major milestones.",
+      "weight": 0.65
+    },
+    "decision_style": {
+      "value": "Analytical",
+      "score": 8,
+      "explanation": "Data-first modeling. You map alternative branches and opportunities before taking actions.",
+      "weight": 0.75
+    }
+  },
+  "dna_version": 2,
+  "confidence_score": 92,
+  "simulations_count_at_refinement": 3
+}

@@ -1,0 +1,17 @@
+{
+  "Year 1": {
+    "A": { "salary": "$80,000", "milestone": "Bootstrap System", "desc": "Rebuild legacy architecture, configure scale thresholds." },
+    "B": { "salary": "$80,000", "milestone": "Stabilize Role", "desc": "Deliver core features, map promotions path." },
+    "C": { "salary": "$80,000", "milestone": "Remote Optimization", "desc": "Streamline day job throughput, secure first freelance client." }
+  },
+  "Year 2-3": {
+    "A": { "salary": "$119,000", "milestone": "Equity Realization", "desc": "Achieve milestone vesting, lead a growing core dev division." },
+    "B": { "salary": "$96,000", "milestone": "Lead Engineer Promotion", "desc": "Assume team leadership, vest first batch of RSUs." },
+    "C": { "salary": "$101,000", "milestone": "Consulting Expansion", "desc": "Double freelance billing rates, register LLC." }
+  },
+  "Year 5": {
+    "A": { "salary": "$178,000", "milestone": "Scale Liquidity", "desc": "Venture secondary sales, leverage personal equity reserves." },
+    "B": { "salary": "$117,000", "milestone": "Principal Path", "desc": "Cross-functional scope, optimize savings allocations." },
+    "C": { "salary": "$128,000", "milestone": "Consulting Transition", "desc": "Option to transition full time to LLC or maintain low-risk mix." }
+  }
+}
