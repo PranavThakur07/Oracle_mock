@@ -42,6 +42,88 @@ import mockReport from './mock/report.json';
 
 type Screen = 'landing' | 'calibration' | 'dna-generated' | 'dashboard' | 'loading' | 'comparison' | 'profile' | 'report';
 
+interface Option {
+  label: string;
+  sublabel: string;
+  value: string;
+  icon: string;
+}
+
+interface QuestionConfig {
+  field: string;
+  title: string;
+  description: string;
+  options: Option[];
+}
+
+const QUESTION_CONFIGS: QuestionConfig[] = [
+  {
+    field: 'goal',
+    title: 'What is your primary career goal right now?',
+    description: 'Select the primary focus that dominates your immediate professional path.',
+    options: [
+      { label: 'Highest Income', sublabel: 'Maximize cash compensation & immediate liquidity', value: 'Highest Income', icon: '💰' },
+      { label: 'Career Growth', sublabel: 'Optimize promotions & skill compounding', value: 'Career Growth', icon: '📈' },
+      { label: 'Entrepreneurship', sublabel: 'Build products, own equity, take venture leaps', value: 'Entrepreneurship', icon: '🚀' },
+      { label: 'Leadership Role', sublabel: 'Drive teams, set strategy, cross-functional scope', value: 'Leadership Role', icon: '👑' },
+      { label: 'Financial Stability', sublabel: 'Preserve capital, lock in low-risk salaries', value: 'Financial Stability', icon: '🛡️' },
+      { label: 'Deep Learning', sublabel: 'Master specialized techs & research sectors', value: 'Deep Learning', icon: '🎓' }
+    ]
+  },
+  {
+    field: 'risk',
+    title: 'What is your risk appetite for career moves?',
+    description: 'How comfortable are you with trade-offs between security and rapid gains?',
+    options: [
+      { label: 'Conservative', sublabel: 'Protect downside, value job security and stable benefits', value: 'Conservative', icon: '🔒' },
+      { label: 'Balanced', sublabel: 'Take calculated, asymmetric risks for high gains', value: 'Balanced', icon: '⚖️' },
+      { label: 'Aggressive', sublabel: 'High risk, high reward paths. Value rapid pivots', value: 'Aggressive', icon: '⚡' }
+    ]
+  },
+  {
+    field: 'financial_style',
+    title: 'What is your personal financial style?',
+    description: 'How do you prioritize allocating your savings and budget?',
+    options: [
+      { label: 'Save First', sublabel: 'Lock 40%+ surplus in index funds & treasury bonds', value: 'Save First', icon: '🐷' },
+      { label: 'Balanced', sublabel: 'Proportional split between safety and growth instruments', value: 'Balanced', icon: '💵' },
+      { label: 'Invest Aggressively', sublabel: 'Leverage crypto, private equities, and personal projects', value: 'Invest Aggressively', icon: '📊' }
+    ]
+  },
+  {
+    field: 'work_life_balance',
+    title: 'How do you value work-life balance?',
+    description: 'Choose your desired integration level between career scaling and personal health.',
+    options: [
+      { label: 'Highest Priority', sublabel: 'Limit work hours to 35-40h, preserve family time', value: 'Highest Priority', icon: '🏡' },
+      { label: 'Balanced Integration', sublabel: 'Flexible mix of hard work and mental wellness', value: 'Balanced', icon: '🍃' },
+      { label: 'Growth Over Balance', sublabel: 'Sprint 60h+ weeks. Prioritize speed over comfort', value: 'Growth Over Balance', icon: '🔥' }
+    ]
+  },
+  {
+    field: 'learning_style',
+    title: 'What is your preferred style of learning?',
+    description: 'How do you acquire new professional competencies?',
+    options: [
+      { label: 'Hands On', sublabel: 'Direct trial, system coding, and hacking', value: 'Hands On', icon: '🛠️' },
+      { label: 'Structured', sublabel: 'University, certs, and structured syllabi', value: 'Structured', icon: '📚' },
+      { label: 'Mixed', sublabel: 'Read papers, audit code, hybrid self-learning', value: 'Mixed', icon: '🧩' }
+    ]
+  },
+  {
+    field: 'vision',
+    title: 'What is your ultimate long-term career vision?',
+    description: 'Where do you see yourself at the peak of your professional trajectory?',
+    options: [
+      { label: 'Build Wealth', sublabel: 'Target $5M+ liquid net worth via career equity', value: 'Build Wealth', icon: '💎' },
+      { label: 'Start Company', sublabel: 'Launch a SaaS or technical venture within 3 years', value: 'Start Company', icon: '🏢' },
+      { label: 'Become Leader', sublabel: 'Ascend to VP of Eng or CTO at major scale', value: 'Become Leader', icon: '📣' },
+      { label: 'Global Career', sublabel: 'Navigate a global career & remote nodes', value: 'Global Career', icon: '🌍' },
+      { label: 'Technical Expert', sublabel: 'Become a distinguished Fellow or Architect', value: 'Technical Expert', icon: '🧠' }
+    ]
+  }
+];
+
 export default function App() {
   const [currentScreen, setCurrentScreen] = useState<Screen>('landing');
   const [calibrated, setCalibrated] = useState(false);
@@ -198,7 +280,10 @@ export default function App() {
           <div className="glow-effect top-10 left-10 opacity-30"></div>
           <div className="glow-effect bottom-10 right-10 opacity-20 bg-accent/10"></div>
           
-          <div className="w-full max-w-lg text-center space-y-8 glass-panel p-8 sm:p-12 rounded-3xl border border-zinc-800/80 shadow-2xl">
+          <div className="w-full max-w-lg text-center space-y-8 glass-panel p-8 sm:p-12 rounded-3xl border border-zinc-800 shadow-2xl relative overflow-hidden">
+            {/* Ambient inner glow */}
+            <div className="absolute -top-12 -left-12 w-24 h-24 bg-primary/10 rounded-full blur-2xl pointer-events-none"></div>
+            
             <div className="flex justify-center">
               <div className="h-14 w-14 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary shadow-[0_0_30px_rgba(37,99,235,0.25)] animate-pulse-slow">
                 <Dna size={28} />
@@ -217,29 +302,45 @@ export default function App() {
               </p>
             </div>
 
+            {/* Checklist feature widget */}
+            <div className="py-5 border-y border-zinc-900/60 max-w-xs mx-auto space-y-2.5 text-left font-mono text-[10px] text-zinc-500">
+              <div className="flex items-center gap-2">
+                <span className="text-primary font-bold">✓</span>
+                <span>Calibrate personality decisions priors</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-primary font-bold">✓</span>
+                <span>Simulate compound salary timelines</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-primary font-bold">✓</span>
+                <span>Compare downside risk volatilities</span>
+              </div>
+            </div>
+
             <div className="flex flex-col gap-3 max-w-xs mx-auto pt-2">
               <button
                 onClick={() => {
                   setCalibrationStep(0);
                   setCurrentScreen('calibration');
                 }}
-                className="w-full flex items-center justify-center gap-2 py-3.5 px-6 rounded-xl bg-primary hover:bg-blue-600 text-xs font-semibold text-white shadow-[0_4px_25px_rgba(37,99,235,0.3)] transition-all cursor-pointer"
+                className="w-full flex items-center justify-center gap-2 py-3.5 px-6 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-xs font-semibold text-white shadow-[0_4px_25px_rgba(37,99,235,0.3)] hover:shadow-[0_4px_30px_rgba(37,99,235,0.4)] transition-all cursor-pointer group"
               >
                 <span>Calibrate My Engine</span>
-                <ArrowRight size={14} />
+                <ArrowRight size={14} className="group-hover:translate-x-0.5 transition-transform" />
               </button>
               <button
                 onClick={() => {
                   setCalibrated(false);
                   setCurrentScreen('dashboard');
                 }}
-                className="w-full py-3 px-6 rounded-xl bg-transparent border border-zinc-800 hover:border-zinc-700 text-zinc-400 hover:text-white transition-all text-xs font-medium cursor-pointer"
+                className="w-full py-3 px-6 rounded-xl bg-zinc-950/40 border border-zinc-850 hover:border-zinc-700 text-zinc-400 hover:text-white transition-all text-xs font-medium cursor-pointer"
               >
                 Enter Workspace (Generic)
               </button>
             </div>
             
-            <div className="text-[10px] text-zinc-650 font-mono">
+            <div className="text-[10px] text-zinc-600 font-mono">
               Hackathon Round 1 UI/UX Clickable Demo
             </div>
           </div>
@@ -249,8 +350,8 @@ export default function App() {
       {/* ----------------- CALIBRATION SCREEN ----------------- */}
       {currentScreen === 'calibration' && (
         <div className="flex-1 flex flex-col justify-center items-center p-6 relative grid-bg">
-          <div className="w-full max-w-2xl space-y-6">
-            <div className="flex items-center justify-between text-[10px] text-zinc-500 font-mono tracking-wider uppercase">
+          <div className="w-full max-w-3xl space-y-6">
+            <div className="flex items-center justify-between text-[10px] text-zinc-550 font-mono tracking-wider uppercase">
               <button
                 onClick={() => {
                   if (calibrationStep > 0) {
@@ -273,163 +374,70 @@ export default function App() {
               </button>
             </div>
 
-            <div className="h-1.5 w-full bg-zinc-900 rounded-full overflow-hidden">
+            <div className="h-1.5 w-full bg-zinc-900 rounded-full overflow-hidden shadow-inner">
               <div
-                className="h-full bg-primary rounded-full transition-all duration-300"
+                className="h-full bg-gradient-to-r from-blue-600 to-indigo-500 rounded-full transition-all duration-300 shadow-[0_0_10px_rgba(96,165,250,0.5)]"
                 style={{ width: `${((calibrationStep + 1) / 6) * 100}%` }}
               ></div>
             </div>
 
             {/* Questions rendering */}
-            {calibrationStep === 0 && (
-              <div className="space-y-6">
-                <div className="space-y-1">
-                  <h2 className="text-xl sm:text-2xl font-bold text-white tracking-tight">What is your primary career goal right now?</h2>
-                  <p className="text-xs text-zinc-550">Select the primary focus that dominates your immediate professional path.</p>
-                </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 pt-2">
-                  {['Highest Income', 'Career Growth', 'Entrepreneurship', 'Leadership Role', 'Financial Stability', 'Deep Learning'].map((opt) => (
+            <div className="space-y-6 glass-panel p-8 sm:p-10 rounded-3xl border border-zinc-800/80 shadow-2xl relative overflow-hidden">
+              <div className="space-y-1.5">
+                <h2 className="text-xl sm:text-2xl font-bold text-white tracking-tight leading-tight">
+                  {QUESTION_CONFIGS[calibrationStep].title}
+                </h2>
+                <p className="text-xs text-zinc-400">
+                  {QUESTION_CONFIGS[calibrationStep].description}
+                </p>
+              </div>
+
+              <div className={`grid gap-4 pt-2 ${
+                QUESTION_CONFIGS[calibrationStep].options.length === 6 
+                  ? 'grid-cols-1 sm:grid-cols-2' 
+                  : QUESTION_CONFIGS[calibrationStep].options.length === 5 
+                    ? 'grid-cols-1 sm:grid-cols-2' 
+                    : 'grid-cols-1 sm:grid-cols-3'
+              }`}>
+                {QUESTION_CONFIGS[calibrationStep].options.map((opt) => {
+                  const field = QUESTION_CONFIGS[calibrationStep].field;
+                  const isSelected = answers[field as keyof typeof answers] === opt.value;
+                  return (
                     <button
-                      key={opt}
-                      onClick={() => handleCalibrationSelection('goal', opt)}
-                      className={`p-5 rounded-2xl border text-left flex items-start gap-4 transition-all duration-200 cursor-pointer ${
-                        answers.goal === opt ? 'bg-primary/10 border-primary text-white' : 'bg-zinc-950/40 border-zinc-850 text-zinc-400 hover:text-zinc-200 hover:border-zinc-700'
+                      key={opt.value}
+                      onClick={() => handleCalibrationSelection(field, opt.value)}
+                      className={`p-5 rounded-2xl border text-left flex items-start gap-4 transition-all duration-300 cursor-pointer ${
+                        isSelected 
+                          ? 'bg-primary/10 border-primary shadow-[0_0_25px_rgba(37,99,235,0.2)] text-white' 
+                          : 'bg-zinc-950/40 border-zinc-850 text-zinc-400 hover:text-zinc-200 hover:border-zinc-750 hover:bg-zinc-900/10'
                       }`}
                     >
-                      <span className="text-2xl">💰</span>
-                      <span className="text-xs font-semibold">{opt}</span>
+                      <div className={`h-11 w-11 rounded-xl flex items-center justify-center text-xl shrink-0 transition-all duration-300 ${
+                        isSelected ? 'bg-primary/20 border border-primary/30 text-white' : 'bg-zinc-900/60 border border-zinc-800 text-zinc-450'
+                      }`}>
+                        {opt.icon}
+                      </div>
+                      <div className="space-y-1">
+                        <span className="text-xs font-bold block text-white tracking-wide">{opt.label}</span>
+                        <span className="text-[10px] text-zinc-500 leading-relaxed block">{opt.sublabel}</span>
+                      </div>
                     </button>
-                  ))}
-                </div>
+                  );
+                })}
               </div>
-            )}
 
-            {calibrationStep === 1 && (
-              <div className="space-y-6">
-                <div className="space-y-1">
-                  <h2 className="text-xl sm:text-2xl font-bold text-white tracking-tight">What is your risk appetite for career moves?</h2>
-                  <p className="text-xs text-zinc-550">How comfortable are you with trade-offs between security and rapid gains?</p>
+              {calibrationStep === 5 && answers.vision && (
+                <div className="flex justify-end pt-4">
+                  <button
+                    onClick={finalizeCalibration}
+                    className="flex items-center gap-2 py-3 px-8 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-xs font-semibold text-white shadow-[0_4px_25px_rgba(37,99,235,0.3)] transition-all cursor-pointer"
+                  >
+                    <span>Finalize Calibration</span>
+                    <ArrowRight size={14} />
+                  </button>
                 </div>
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5 pt-2">
-                  {['Conservative', 'Balanced', 'Aggressive'].map((opt) => (
-                    <button
-                      key={opt}
-                      onClick={() => handleCalibrationSelection('risk', opt)}
-                      className={`p-5 rounded-2xl border text-left flex flex-col gap-3 transition-all duration-200 cursor-pointer ${
-                        answers.risk === opt ? 'bg-primary/10 border-primary text-white' : 'bg-zinc-950/40 border-zinc-850 text-zinc-400 hover:text-zinc-200 hover:border-zinc-700'
-                      }`}
-                    >
-                      <span className="text-2xl">⚖️</span>
-                      <span className="text-xs font-semibold">{opt}</span>
-                    </button>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {calibrationStep === 2 && (
-              <div className="space-y-6">
-                <div className="space-y-1">
-                  <h2 className="text-xl sm:text-2xl font-bold text-white tracking-tight">What is your personal financial style?</h2>
-                  <p className="text-xs text-zinc-550">How do you prioritize allocating your savings and budget?</p>
-                </div>
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5 pt-2">
-                  {['Save First', 'Balanced', 'Invest Aggressively'].map((opt) => (
-                    <button
-                      key={opt}
-                      onClick={() => handleCalibrationSelection('financial_style', opt)}
-                      className={`p-5 rounded-2xl border text-left flex flex-col gap-3 transition-all duration-200 cursor-pointer ${
-                        answers.financial_style === opt ? 'bg-primary/10 border-primary text-white' : 'bg-zinc-950/40 border-zinc-850 text-zinc-400 hover:text-zinc-200 hover:border-zinc-700'
-                      }`}
-                    >
-                      <span className="text-2xl">💵</span>
-                      <span className="text-xs font-semibold">{opt}</span>
-                    </button>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {calibrationStep === 3 && (
-              <div className="space-y-6">
-                <div className="space-y-1">
-                  <h2 className="text-xl sm:text-2xl font-bold text-white tracking-tight">How do you value work-life balance?</h2>
-                  <p className="text-xs text-zinc-550">Choose your desired integration level between career scaling and personal health.</p>
-                </div>
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5 pt-2">
-                  {['Highest Priority', 'Balanced', 'Growth Over Balance'].map((opt) => (
-                    <button
-                      key={opt}
-                      onClick={() => handleCalibrationSelection('work_life_balance', opt)}
-                      className={`p-5 rounded-2xl border text-left flex flex-col gap-3 transition-all duration-200 cursor-pointer ${
-                        answers.work_life_balance === opt ? 'bg-primary/10 border-primary text-white' : 'bg-zinc-950/40 border-zinc-850 text-zinc-400 hover:text-zinc-200 hover:border-zinc-700'
-                      }`}
-                    >
-                      <span className="text-2xl">🏡</span>
-                      <span className="text-xs font-semibold">{opt}</span>
-                    </button>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {calibrationStep === 4 && (
-              <div className="space-y-6">
-                <div className="space-y-1">
-                  <h2 className="text-xl sm:text-2xl font-bold text-white tracking-tight">What is your preferred style of learning?</h2>
-                  <p className="text-xs text-zinc-550">How do you acquire new professional competencies?</p>
-                </div>
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5 pt-2">
-                  {['Hands On', 'Structured', 'Mixed'].map((opt) => (
-                    <button
-                      key={opt}
-                      onClick={() => handleCalibrationSelection('learning_style', opt)}
-                      className={`p-5 rounded-2xl border text-left flex flex-col gap-3 transition-all duration-200 cursor-pointer ${
-                        answers.learning_style === opt ? 'bg-primary/10 border-primary text-white' : 'bg-zinc-950/40 border-zinc-850 text-zinc-400 hover:text-zinc-200 hover:border-zinc-700'
-                      }`}
-                    >
-                      <span className="text-2xl">🛠️</span>
-                      <span className="text-xs font-semibold">{opt}</span>
-                    </button>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {calibrationStep === 5 && (
-              <div className="space-y-6">
-                <div className="space-y-1">
-                  <h2 className="text-xl sm:text-2xl font-bold text-white tracking-tight">What is your ultimate long-term career vision?</h2>
-                  <p className="text-xs text-zinc-550">Where do you see yourself at the peak of your professional trajectory?</p>
-                </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 pt-2">
-                  {['Build Wealth', 'Start Company', 'Become Leader', 'Global Career', 'Technical Expert'].map((opt) => (
-                    <button
-                      key={opt}
-                      onClick={() => handleCalibrationSelection('vision', opt)}
-                      className={`p-5 rounded-2xl border text-left flex items-start gap-4 transition-all duration-200 cursor-pointer ${
-                        answers.vision === opt ? 'bg-primary/10 border-primary text-white' : 'bg-zinc-950/40 border-zinc-850 text-zinc-400 hover:text-zinc-200 hover:border-zinc-700'
-                      }`}
-                    >
-                      <span className="text-2xl">💎</span>
-                      <span className="text-xs font-semibold">{opt}</span>
-                    </button>
-                  ))}
-                </div>
-
-                {answers.vision && (
-                  <div className="flex justify-end pt-4">
-                    <button
-                      onClick={finalizeCalibration}
-                      className="flex items-center gap-2 py-3 px-8 rounded-xl bg-primary hover:bg-blue-600 text-xs font-semibold text-white shadow-lg cursor-pointer"
-                    >
-                      <span>Finalize Calibration</span>
-                      <ArrowRight size={14} />
-                    </button>
-                  </div>
-                )}
-              </div>
-            )}
+              )}
+            </div>
           </div>
         </div>
       )}
